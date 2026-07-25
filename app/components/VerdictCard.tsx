@@ -21,9 +21,9 @@ import { VerdictSeal } from "./VerdictSeal";
  */
 
 const TONE = {
-  refuted: { ink: "#ff5a5f", edge: "rgba(255,90,95,.4)", wash: "rgba(42,15,19,.55)" },
-  supported: { ink: "#1fc16b", edge: "rgba(31,193,107,.4)", wash: "rgba(13,26,20,.55)" },
-  unverifiable: { ink: "#ffc83a", edge: "rgba(255,200,58,.4)", wash: "rgba(26,21,9,.55)" },
+  refuted: { ink: "#e8232f", edge: "rgba(232,35,47,.4)", wash: "rgba(42,15,19,.55)" },
+  supported: { ink: "#38b98a", edge: "rgba(56,185,138,.4)", wash: "rgba(13,26,20,.55)" },
+  unverifiable: { ink: "#d99a2b", edge: "rgba(217,154,43,.4)", wash: "rgba(26,21,9,.55)" },
 } as const;
 
 export function VerdictCard({ claim }: { claim: Claim }) {
@@ -58,9 +58,9 @@ export function VerdictCard({ claim }: { claim: Claim }) {
           {/* the claim, struck through as the verdict lands */}
           <div className="relative">
             <motion.p
-              className="font-display text-lg italic"
-              initial={{ color: "#eceef2" }}
-              animate={{ color: refuted ? "#8891a6" : "#eceef2" }}
+              className="font-serif text-lg italic"
+              initial={{ color: "#e9e6df" }}
+              animate={{ color: refuted ? "#8891a6" : "#e9e6df" }}
               transition={{ delay: 0.2, duration: 0.35 }}
             >
               &ldquo;{claim.text}&rdquo;
@@ -110,7 +110,7 @@ export function VerdictCard({ claim }: { claim: Claim }) {
             {claim.reasoning && (
               <motion.p
                 className="mt-4 border-t pt-4 text-sm text-paper"
-                style={{ borderColor: "rgba(120,160,255,.15)" }}
+                style={{ borderColor: "rgba(233,230,223,.15)" }}
                 variants={{ hidden: { opacity: 0, y: 6 }, shown: { opacity: 1, y: 0 } }}
               >
                 {claim.reasoning}

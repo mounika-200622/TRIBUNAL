@@ -28,3 +28,6 @@ next-env.d.ts
 .claude/
 
 .vercel
+
+# local design scratch, never committed
+/public/_scratch/

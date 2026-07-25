@@ -9,15 +9,15 @@ const ForceGraph2D = dynamic(() => import("react-force-graph-2d"), {
 });
 
 const VERDICT_COLOR: Record<string, string> = {
-  supported: "#1fc16b",
-  refuted: "#ff5a5f",
-  unverifiable: "#ffc83a",
+  supported: "#38b98a",
+  refuted: "#e8232f",
+  unverifiable: "#d99a2b",
 };
 
 const STANCE_COLOR: Record<string, string> = {
-  supports: "#1fc16b",
-  contradicts: "#ff5a5f",
-  neutral: "#8b93a3",
+  supports: "#38b98a",
+  contradicts: "#e8232f",
+  neutral: "#8d8a83",
 };
 
 function SkeletonNodes() {
@@ -41,6 +41,7 @@ function SkeletonNodes() {
 
 export function EvidenceGraph({ state }: { state: TribunalState }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const fgRef = useRef<any>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [reducedMotion, setReducedMotion] = useState(false);
 
@@ -102,25 +103,27 @@ export function EvidenceGraph({ state }: { state: TribunalState }) {
 
       {!showSkeleton && size.width > 0 && (
         <ForceGraph2D
+          ref={fgRef}
           width={size.width}
           height={size.height}
           graphData={graphData}
-          backgroundColor="rgba(15,20,38,0.55)"
-          nodeRelSize={4}
+          backgroundColor="rgba(18,17,16,0.55)"
+          nodeRelSize={6}
           cooldownTicks={reducedMotion ? 0 : Infinity}
-          linkColor={(l: any) => STANCE_COLOR[l.stance] ?? "#8b93a3"}
+          linkColor={(l: any) => STANCE_COLOR[l.stance] ?? "#8d8a83"}
           linkWidth={1.5}
+          onEngineStop={() => fgRef.current?.zoomToFit(600, 60)}
           nodeLabel={(n: any) => n.label}
           nodeCanvasObject={(node: any, ctx: CanvasRenderingContext2D) => {
             if (node.x === undefined || node.y === undefined) return;
 
-            const baseR = 3 + Math.sqrt(node.val ?? 3) * 2;
+            const baseR = 5 + Math.sqrt(node.val ?? 3) * 3;
             const fill =
               node.kind === "claim"
                 ? node.verdict
                   ? VERDICT_COLOR[node.verdict]
-                  : "#7b61ff"
-                : "#8b93a3";
+                  : "#e8232f"
+                : "#8d8a83";
 
             ctx.beginPath();
             ctx.arc(node.x, node.y, baseR, 0, 2 * Math.PI);
@@ -133,7 +136,7 @@ export function EvidenceGraph({ state }: { state: TribunalState }) {
               const pulseR = baseR + 3 + t * 8;
               ctx.beginPath();
               ctx.arc(node.x, node.y, pulseR, 0, 2 * Math.PI);
-              ctx.strokeStyle = "#7b61ff";
+              ctx.strokeStyle = "#e8232f";
               ctx.lineWidth = 1.5;
               ctx.globalAlpha = 1 - t;
               ctx.stroke();

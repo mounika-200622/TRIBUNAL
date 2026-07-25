@@ -35,28 +35,23 @@ export function ArgumentFeed({ state }: { state: TribunalState }) {
         {args.map((a, i) => (
           <li
             key={a.id}
-            className={`tribunal-arg-card group relative overflow-hidden rounded-[10px] border p-4 backdrop-blur-sm transition-transform hover:-translate-y-0.5 ${
+            className={`tribunal-arg-card group relative overflow-hidden border p-4 transition-transform ${
               a.role === "prosecutor"
-                ? "prosecutor border-[rgba(255,90,95,.35)] bg-gradient-to-b from-[rgba(46,20,24,.55)] to-[rgba(13,17,32,.75)]"
-                : "defender border-[rgba(31,193,107,.35)] bg-gradient-to-b from-[rgba(15,38,29,.55)] to-[rgba(13,17,32,.75)]"
+                ? "prosecutor border-[rgba(232,35,47,.35)] bg-gradient-to-b from-[rgba(46,20,24,.55)] to-[rgba(13,17,32,.75)]"
+                : "defender border-[rgba(56,185,138,.35)] bg-gradient-to-b from-[rgba(15,38,29,.55)] to-[rgba(13,17,32,.75)]"
             }`}
           >
-            <div
-              className={`pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full blur-3xl transition-opacity duration-300 group-hover:opacity-50 ${
-                a.role === "prosecutor" ? "bg-[#ff5a5f]/25" : "bg-[#1fc16b]/25"
-              }`}
-            />
 
             <div className="relative flex items-center justify-between">
               <span
-                className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10px] uppercase tracking-wide ${
+                className={`inline-flex items-center gap-1.5 border px-2 py-0.5 text-[10px] uppercase tracking-[0.16em] ${
                   a.role === "prosecutor"
-                    ? "border-[rgba(255,90,95,.4)] text-refuted"
-                    : "border-[rgba(31,193,107,.4)] text-supported"
+                    ? "border-[rgba(232,35,47,.4)] text-refuted"
+                    : "border-[rgba(56,185,138,.4)] text-supported"
                 }`}
               >
                 <span
-                  className={`h-1.5 w-1.5 rounded-full ${
+                  className={`h-1.5 w-1.5 ${
                     a.role === "prosecutor" ? "bg-refuted" : "bg-supported"
                   }`}
                 />
@@ -75,7 +70,7 @@ export function ArgumentFeed({ state }: { state: TribunalState }) {
               {a.lens}
             </p>
             <p className="relative mt-1 text-sm">{a.position}</p>
-            <div className="relative mt-3 h-[3px] w-full overflow-hidden rounded bg-[rgba(120,160,255,.15)]">
+            <div className="relative mt-3 h-[2px] w-full overflow-hidden bg-[rgba(233,230,223,.14)]">
               <div
                 className={`h-full ${
                   a.role === "prosecutor" ? "bg-refuted" : "bg-supported"

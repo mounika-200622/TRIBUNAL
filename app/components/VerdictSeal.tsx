@@ -16,9 +16,9 @@ import type { VerdictKind } from "@/lib/types";
  */
 
 const TONE: Record<VerdictKind, { ink: string; wash: string; label: string }> = {
-  refuted: { ink: "#ff5a5f", wash: "#1a0e11", label: "REFUTED" },
-  supported: { ink: "#1fc16b", wash: "#0d1a14", label: "SUPPORTED" },
-  unverifiable: { ink: "#ffc83a", wash: "#1a1509", label: "UNVERIFIABLE" },
+  refuted: { ink: "#e8232f", wash: "#1a0e11", label: "REFUTED" },
+  supported: { ink: "#38b98a", wash: "#0d1a14", label: "SUPPORTED" },
+  unverifiable: { ink: "#d99a2b", wash: "#1a1509", label: "UNVERIFIABLE" },
 };
 
 export function VerdictSeal({

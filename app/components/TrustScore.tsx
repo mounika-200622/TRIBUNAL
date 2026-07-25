@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { TribunalState } from "@/lib/reducer";
 import { counts } from "@/lib/reducer";
+import { VerdictCard } from "./VerdictCard";
 
 const CX = 220;
 const CY = 220;
@@ -22,7 +23,7 @@ function tier(score: number) {
 function tierColor(score: number) {
   if (score < 40) return "#ff5470";
   if (score < 70) return "#ffb020";
-  return "#2be6a6";
+  return "#38b98a";
 }
 
 function verdictParts(score: number): { prefix: string; accent: string; suffix: string } {
@@ -34,13 +35,14 @@ function verdictParts(score: number): { prefix: string; accent: string; suffix: 
 }
 
 const VERDICT_COLOR: Record<string, string> = {
-  supported: "#2be6a6",
+  supported: "#38b98a",
   refuted: "#ff5470",
   unverifiable: "#ffb020",
 };
 
 export function TrustScore({ state }: { state: TribunalState }) {
   const c = counts(state);
+  const settled = state.claims.filter((x) => x.verdict);
   const score = state.trustScore ?? 0;
   const [animScore, setAnimScore] = useState(0);
   const [arcOffset, setArcOffset] = useState(CIRCUMFERENCE);
@@ -75,7 +77,7 @@ export function TrustScore({ state }: { state: TribunalState }) {
     try {
       const html2canvas = (await import("html2canvas")).default;
       const canvas = await html2canvas(cardRef.current, {
-        backgroundColor: "#080b14",
+        backgroundColor: "#0a0a09",
         scale: 2,
       });
       const link = document.createElement("a");
@@ -109,7 +111,7 @@ export function TrustScore({ state }: { state: TribunalState }) {
       const angle = (Math.PI * 2 * i) / arr.length - Math.PI / 2;
       return {
         key: claim.id,
-        color: VERDICT_COLOR[claim.verdict as string] ?? "#7c88a8",
+        color: VERDICT_COLOR[claim.verdict as string] ?? "#8d8a83",
         top: 50 + R_MARKER_PCT * Math.sin(angle),
         left: 50 + R_MARKER_PCT * Math.cos(angle),
       };
@@ -200,6 +202,36 @@ export function TrustScore({ state }: { state: TribunalState }) {
       </div>
 
       <div className="tv-stamp">Verified by Tribunal · session #{sessionId}</div>
+
+      {/*
+        The record.
+
+        A score on its own tells a reader the answer was bad without telling
+        them which part, or why. Every claim that was ruled on is listed here
+        with its failure mode, the panel split and the sources, so the number
+        above is something you can check rather than something you take on
+        trust.
+      */}
+      {settled.length > 0 && (
+        <section className="tv-record">
+          <div className="tv-record-head">
+            <span className="tv-record-eyebrow">The record</span>
+            <span className="tv-record-count">
+              {settled.length} claim{settled.length === 1 ? "" : "s"} ruled on
+            </span>
+          </div>
+          <ol className="tv-record-list">
+            {settled.map((claim, i) => (
+              <li key={claim.id} className="tv-record-item">
+                <span className="tv-record-index">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <VerdictCard claim={claim} />
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
     </div>
   );
 }

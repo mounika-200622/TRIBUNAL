@@ -12,8 +12,7 @@ export function TribunalView({ state }: { state: TribunalState }) {
   return (
     <div className="relative z-10 flex h-screen flex-col">
       <header className="flex items-center justify-between border-b border-line px-6 py-3">
-        <h1 className="flex items-center gap-2.5 font-display text-lg font-bold">
-          <span className="tribunal-dot-live" />
+        <h1 className="flex items-center gap-2.5 font-body text-[13px] font-semibold uppercase tracking-[0.28em] text-paper">
           Tribunal
         </h1>
         <p className="font-mono text-xs uppercase tracking-wide text-dim">
@@ -28,8 +27,8 @@ export function TribunalView({ state }: { state: TribunalState }) {
       ) : (
       <div className="relative z-10 grid flex-1 grid-cols-1 overflow-hidden md:grid-cols-2">
         <div className="flex flex-col p-4 md:border-b-0">
-          <div className="flex h-full flex-col overflow-hidden rounded-[10px] border border-[rgba(255,255,255,.5)] bg-gradient-to-b from-[rgba(17,22,41,.55)] to-[rgba(13,17,32,.55)] shadow-[0_0_0_1px_rgba(255,255,255,.2),0_0_22px_-2px_rgba(255,255,255,.7),0_30px_70px_-30px_rgba(0,0,0,.7)]">
-            <p className="border-b border-[rgba(120,160,255,.15)] px-4 py-3 font-mono text-xs uppercase tracking-wide text-dim">
+          <div className="tv-evidence flex h-full flex-col overflow-hidden border border-line bg-[rgba(18,17,16,.62)]">
+            <p className="border-b border-[rgba(233,230,223,.15)] px-4 py-3 font-mono text-xs uppercase tracking-wide text-dim">
               Evidence graph
             </p>
             <div className="flex-1 overflow-hidden">

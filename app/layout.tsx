@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
-import { Fraunces, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const display = Fraunces({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  style: ["normal", "italic"],
-});
-const body = IBM_Plex_Mono({
-  variable: "--font-body",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-});
+/**
+ * The faces are served from public/hero and declared with @font-face in
+ * globals.css.
+ *
+ * They came through next/font before, which sets --font-display and
+ * --font-body on the html element. That collides with the theme block, which
+ * declares the same two properties on :root, and which one wins depends on
+ * stylesheet order. Declaring them in one place removes the ambiguity.
+ */
 
 export const metadata: Metadata = {
   title: "Tribunal — every claim gets a trial",
@@ -24,10 +21,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${display.variable} ${body.variable} h-full antialiased`}
-    >
+    <html lang="en" className="h-full antialiased">
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );

@@ -15,7 +15,7 @@ export function ErrorState({
       <p className="mt-2 text-dim">{message}</p>
       <button
         onClick={onRetry}
-        className="mt-6 rounded-lg bg-accent px-6 py-2.5 font-display font-bold text-white"
+        className="mt-6 bg-accent px-6 py-2.5 font-body text-[13px] font-semibold tracking-[0.14em] text-white uppercase"
       >
         Try again
       </button>
