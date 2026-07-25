@@ -853,3 +853,105 @@ body {
 @media (max-width: 700px) {
   .tv-record-item { grid-template-columns: 1fr; gap: 6px; }
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   The tally.
+
+   What stood here was a dial: concentric rings, tick marks, orbit dots. That
+   is the vocabulary of an instrument panel, it is what every dashboard
+   reaches for, and it carried one number while saying nothing about which
+   claim went which way.
+
+   A tribunal does not return a gauge. It returns a tally. The figure is set
+   at display scale, and beside it one segment per claim in the order they
+   were tried, so the outcome reads as a shape before it is read as a number.
+   ───────────────────────────────────────────────────────────────────────── */
+
+.tv-tally {
+  width: min(980px, 92vw);
+  margin: clamp(28px, 6vh, 72px) auto 0;
+  text-align: left;
+}
+.tv-tally-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  color: var(--color-dim);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-line);
+}
+.tv-tally-body {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 72px);
+  align-items: end;
+  padding-top: clamp(18px, 3vh, 34px);
+}
+.tv-tally-figure { display: flex; flex-direction: column; }
+.tv-tally-score {
+  font-family: var(--font-display);
+  font-size: clamp(96px, 17vw, 250px);
+  line-height: 0.78;
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-refuted);
+}
+.tv-tally-score.tier-mid { color: var(--color-unverifiable); }
+.tv-tally-score.tier-high { color: var(--color-supported); }
+.tv-tally-max {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-dim);
+  margin-top: 14px;
+}
+.tv-tally-right { padding-bottom: 6px; }
+
+/* one segment per claim. gaps rather than borders, so the row reads as a run
+   of separate rulings and not a single divided bar */
+.tv-tally-bar {
+  list-style: none;
+  margin: 0 0 clamp(16px, 2.4vh, 26px);
+  padding: 0;
+  display: flex;
+  gap: 4px;
+  height: clamp(26px, 3.4vw, 44px);
+}
+.tv-seg { flex: 1; background: var(--color-line); }
+.tv-seg.is-supported { background: var(--color-supported); }
+.tv-seg.is-refuted { background: var(--color-refuted); }
+.tv-seg.is-unverifiable { background: var(--color-unverifiable); }
+
+.tv-tally-key {
+  display: flex;
+  gap: clamp(18px, 3vw, 44px);
+  margin: 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-line);
+}
+.tv-tally-key div { display: flex; align-items: baseline; gap: 8px; }
+.tv-tally-key dt {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.2vw, 32px);
+  line-height: 1;
+  color: var(--color-supported);
+}
+.tv-tally-key .is-refuted dt { color: var(--color-refuted); }
+.tv-tally-key .is-open dt { color: var(--color-unverifiable); }
+.tv-tally-key dd {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-dim);
+}
+
+@media (max-width: 720px) {
+  .tv-tally-body { grid-template-columns: 1fr; align-items: start; gap: 20px; }
+  .tv-tally-key { flex-wrap: wrap; gap: 16px; }
+}

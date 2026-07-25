@@ -121,51 +121,41 @@ export function TrustScore({ state }: { state: TribunalState }) {
 
   return (
     <div ref={cardRef} className="tv-stage">
-      <div className="tv-seal">
-        <div className="tv-seal-ring">
-          <svg viewBox="0 0 440 440">
-            <g>
-              {ticks.map((t) => (
-                <line
-                  key={t.key}
-                  x1={t.x1}
-                  y1={t.y1}
-                  x2={t.x2}
-                  y2={t.y2}
-                  className={`tv-tick ${t.major ? "major" : ""}`}
-                />
-              ))}
-            </g>
-            <circle className="tv-arc-track" cx={CX} cy={CY} r={R_ARC} />
-            <circle className="tv-arc-track" cx={CX} cy={CY} r={178} />
-            <circle className="tv-arc-track" cx={CX} cy={CY} r={160} />
-            <circle
-              className="tv-arc-progress"
-              cx={CX}
-              cy={CY}
-              r={R_ARC}
-              stroke={tierColor(score)}
-              strokeDasharray={CIRCUMFERENCE}
-              strokeDashoffset={arcOffset}
-              style={{ transition: "stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1)" }}
-            />
-          </svg>
+      <div className="tv-tally">
+        <div className="tv-tally-head">
+          <span>[SESSION {sessionId}]</span>
+          <span>[{settled.length} RULED ON]</span>
         </div>
 
-        {markers.map((m) => (
-          <div
-            key={m.key}
-            className="tv-orbit-marker"
-            style={{ color: m.color, top: `${m.top}%`, left: `${m.left}%` }}
-          >
-            <div className="tv-core" />
+        <div className="tv-tally-body">
+          <div className="tv-tally-figure">
+            <span className={`tv-tally-score ${tier(score)}`}>{animScore}</span>
+            <span className="tv-tally-max">out of 100</span>
           </div>
-        ))}
 
-        <div className="tv-core-readout">
-          <span className="tv-core-label">Trust Score</span>
-          <span className={`tv-core-score ${tier(score)}`}>{animScore}</span>
-          <span className="tv-core-max">/ 100</span>
+          <div className="tv-tally-right">
+            {/* one segment per claim, in the order they were tried, so the
+                number above is legible as a shape before it is read */}
+            <ol className="tv-tally-bar" aria-hidden>
+              {settled.map((cl) => (
+                <li key={cl.id} className={`tv-seg is-${cl.verdict}`} />
+              ))}
+            </ol>
+            <dl className="tv-tally-key">
+              <div>
+                <dt>{c.supported}</dt>
+                <dd>Upheld</dd>
+              </div>
+              <div className="is-refuted">
+                <dt>{c.refuted}</dt>
+                <dd>Refuted</dd>
+              </div>
+              <div className="is-open">
+                <dt>{c.unverifiable}</dt>
+                <dd>Unverifiable</dd>
+              </div>
+            </dl>
+          </div>
         </div>
       </div>
 
