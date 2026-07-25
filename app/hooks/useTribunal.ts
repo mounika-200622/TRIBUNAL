@@ -1,5 +1,6 @@
 "use client";
 
+
 import { useCallback, useReducer, useRef, useState } from "react";
 import { mockTribunal } from "@/lib/mock";
 import { initialState, reduce, counts } from "@/lib/reducer";
