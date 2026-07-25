@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 300" font-family="system-ui,-apple-system,sans-serif">
+<rect width="620" height="300" fill="#fff"/>
+<text x="24" y="34" font-size="19" font-weight="700" fill="#12141a">Naming the right failure mode</text>
+<text x="24" y="54" font-size="12" fill="#8b93a3">Not just "wrong" — fabricated citation vs stale fact vs overgeneralization.</text><text x="176" y="105" font-size="12" font-weight="400" fill="#8b93a3" text-anchor="end">Single verifier</text>
+<rect x="190" y="84" width="360" height="34" fill="#f1f2f5" rx="3"/>
+<rect x="190" y="84" width="72" height="34" fill="#c7ccd6" rx="3"/>
+<text x="272" y="105" font-size="13" font-weight="700" fill="#12141a">20%</text><text x="176" y="159" font-size="12" font-weight="400" fill="#8b93a3" text-anchor="end">Sequential (researcher → checker)</text>
+<rect x="190" y="138" width="360" height="34" fill="#f1f2f5" rx="3"/>
+<rect x="190" y="138" width="119.88000000000001" height="34" fill="#c7ccd6" rx="3"/>
+<text x="319.88" y="159" font-size="13" font-weight="700" fill="#12141a">33%</text><text x="176" y="213" font-size="12" font-weight="700" fill="#12141a" text-anchor="end">Adversarial panel (ours)</text>
+<rect x="190" y="192" width="360" height="34" fill="#f1f2f5" rx="3"/>
+<rect x="190" y="192" width="198.00000000000003" height="34" fill="#7b61ff" rx="3"/>
+<text x="398" y="213" font-size="13" font-weight="700" fill="#12141a">55%</text></svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 500" font-family="system-ui,-apple-system,sans-serif">
+<rect width="560" height="500" fill="#fff"/>
+<text x="74" y="34" font-size="19" font-weight="700" fill="#12141a">Is the confidence calibrated?</text>
+<text x="74" y="54" font-size="12" fill="#8b93a3">Stated confidence vs observed accuracy. On the line = honest.</text><line x1="74" y1="502" x2="486" y2="90" stroke="#8b93a3" stroke-dasharray="5 5"/>
+<text x="480" y="106" font-size="10" fill="#8b93a3" text-anchor="end">perfect calibration</text><rect x="74" y="90" width="412" height="412" fill="none" stroke="#e8eaee"/><text x="74" y="520" font-size="10" fill="#8b93a3" text-anchor="middle">50%</text>
+<text x="66" y="506" font-size="10" fill="#8b93a3" text-anchor="end">50%</text><text x="156.4" y="520" font-size="10" fill="#8b93a3" text-anchor="middle">60%</text>
+<text x="66" y="423.6" font-size="10" fill="#8b93a3" text-anchor="end">60%</text><text x="238.8" y="520" font-size="10" fill="#8b93a3" text-anchor="middle">70%</text>
+<text x="66" y="341.2" font-size="10" fill="#8b93a3" text-anchor="end">70%</text><text x="321.2" y="520" font-size="10" fill="#8b93a3" text-anchor="middle">80%</text>
+<text x="66" y="258.8" font-size="10" fill="#8b93a3" text-anchor="end">80%</text><text x="403.6" y="520" font-size="10" fill="#8b93a3" text-anchor="middle">90%</text>
+<text x="66" y="176.39999999999998" font-size="10" fill="#8b93a3" text-anchor="end">90%</text><text x="486" y="520" font-size="10" fill="#8b93a3" text-anchor="middle">100%</text>
+<text x="66" y="94" font-size="10" fill="#8b93a3" text-anchor="end">100%</text><circle cx="370.64" cy="502" r="7" fill="#7b61ff" opacity="0.82"/>
+<text x="370.64" y="489" font-size="10" fill="#12141a" text-anchor="middle">n=2</text><circle cx="463.75199999999995" cy="90" r="14" fill="#7b61ff" opacity="0.82"/>
+<text x="463.75199999999995" y="70" font-size="10" fill="#12141a" text-anchor="middle">n=26</text><polyline points="370.64,502 463.75199999999995,90" fill="none" stroke="#7b61ff" stroke-width="2"/><text x="280" y="478" font-size="11" fill="#8b93a3" text-anchor="middle">stated confidence</text>
+<text x="18" y="296" font-size="11" fill="#8b93a3" text-anchor="middle" transform="rotate(-90 18 296)">observed accuracy</text></svg>

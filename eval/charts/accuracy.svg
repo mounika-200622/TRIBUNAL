@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" font-family="system-ui,-apple-system,sans-serif">
+<rect width="880" height="460" fill="#fff"/>
+<text x="70" y="34" font-size="20" font-weight="700" fill="#12141a">Verdict accuracy by reasoning architecture</text>
+<text x="70" y="54" font-size="12" fill="#8b93a3">Same model, same retrieved evidence — only the reasoning structure differs. n = 28 claims.</text><line x1="70" y1="364" x2="840" y2="364" stroke="#e8eaee"/>
+<text x="60" y="368" font-size="11" fill="#8b93a3" text-anchor="end">0%</text><line x1="70" y1="289" x2="840" y2="289" stroke="#e8eaee"/>
+<text x="60" y="293" font-size="11" fill="#8b93a3" text-anchor="end">25%</text><line x1="70" y1="214" x2="840" y2="214" stroke="#e8eaee"/>
+<text x="60" y="218" font-size="11" fill="#8b93a3" text-anchor="end">50%</text><line x1="70" y1="139" x2="840" y2="139" stroke="#e8eaee"/>
+<text x="60" y="143" font-size="11" fill="#8b93a3" text-anchor="end">75%</text><line x1="70" y1="64" x2="840" y2="64" stroke="#e8eaee"/>
+<text x="60" y="68" font-size="11" fill="#8b93a3" text-anchor="end">100%</text><rect x="112.33333333333334" y="235.3" width="52" height="128.7" fill="#c7ccd6" opacity="1" rx="2"/>
+<text x="138.33333333333334" y="228.3" font-size="12" font-weight="700" fill="#12141a" text-anchor="middle">43</text><rect x="172.33333333333334" y="101.5" width="52" height="262.5" fill="#c7ccd6" opacity="0.75" rx="2"/>
+<text x="198.33333333333334" y="94.5" font-size="12" font-weight="700" fill="#12141a" text-anchor="middle">88</text><rect x="232.33333333333334" y="289" width="52" height="75" fill="#c7ccd6" opacity="0.5" rx="2"/>
+<text x="258.33333333333337" y="282" font-size="12" font-weight="700" fill="#12141a" text-anchor="middle">25</text><text x="198.33333333333334" y="388" font-size="13" font-weight="700" fill="#12141a" text-anchor="middle">Single verifier</text><rect x="369" y="267.7" width="52" height="96.3" fill="#c7ccd6" opacity="1" rx="2"/>
+<text x="395" y="260.7" font-size="12" font-weight="700" fill="#12141a" text-anchor="middle">32</text><rect x="429" y="139" width="52" height="225" fill="#c7ccd6" opacity="0.75" rx="2"/>
+<text x="455" y="132" font-size="12" font-weight="700" fill="#12141a" text-anchor="middle">75</text><rect x="489" y="319" width="52" height="45" fill="#c7ccd6" opacity="0.5" rx="2"/>
+<text x="515" y="312" font-size="12" font-weight="700" fill="#12141a" text-anchor="middle">15</text><text x="455" y="388" font-size="13" font-weight="700" fill="#12141a" text-anchor="middle">Sequential</text><text x="455" y="403" font-size="11" font-weight="400" fill="#8b93a3" text-anchor="middle">(researcher → checker)</text><rect x="625.6666666666667" y="74.80000000000001" width="52" height="289.2" fill="#7b61ff" opacity="1" rx="2"/>
+<text x="651.6666666666667" y="67.80000000000001" font-size="12" font-weight="700" fill="#12141a" text-anchor="middle">96</text><rect x="685.6666666666667" y="101.5" width="52" height="262.5" fill="#7b61ff" opacity="0.75" rx="2"/>
+<text x="711.6666666666667" y="94.5" font-size="12" font-weight="700" fill="#12141a" text-anchor="middle">88</text><rect x="745.6666666666667" y="64" width="52" height="300" fill="#7b61ff" opacity="0.5" rx="2"/>
+<text x="771.6666666666667" y="57" font-size="12" font-weight="700" fill="#12141a" text-anchor="middle">100</text><text x="711.6666666666667" y="388" font-size="13" font-weight="700" fill="#12141a" text-anchor="middle">Adversarial panel</text><text x="711.6666666666667" y="403" font-size="11" font-weight="400" fill="#8b93a3" text-anchor="middle">(ours)</text><rect x="70" y="429" width="11" height="11" fill="#7b61ff" opacity="1" rx="2"/>
+<text x="87" y="438" font-size="11" fill="#8b93a3">Overall</text><rect x="220" y="429" width="11" height="11" fill="#7b61ff" opacity="0.75" rx="2"/>
+<text x="237" y="438" font-size="11" fill="#8b93a3">On true claims</text><rect x="370" y="429" width="11" height="11" fill="#7b61ff" opacity="0.5" rx="2"/>
+<text x="387" y="438" font-size="11" fill="#8b93a3">On false claims</text></svg>
