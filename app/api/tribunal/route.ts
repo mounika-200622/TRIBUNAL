@@ -3,6 +3,7 @@ import { searchEvidence } from "@/lib/retrieval/search";
 import { disagreementOf, runPanel } from "@/lib/agents/advocate";
 import { judgeClaim, trustScore } from "@/lib/agents/judge";
 import { hasGroq } from "@/lib/config";
+import { allow } from "@/lib/rateLimit";
 import type { Claim, StreamEvent } from "@/lib/types";
 
 /**
@@ -17,6 +18,14 @@ import type { Claim, StreamEvent } from "@/lib/types";
 export const maxDuration = 60;
 
 export async function POST(req: Request) {
+  const gate = allow(req);
+  if (!gate.ok) {
+    return Response.json(
+      { error: "Too many trials from this address. Give it a minute." },
+      { status: 429, headers: { "Retry-After": String(gate.retryAfterSec) } },
+    );
+  }
+
   const { text } = (await req.json().catch(() => ({}))) as { text?: string };
 
   if (!text || text.trim().length < 20) {
