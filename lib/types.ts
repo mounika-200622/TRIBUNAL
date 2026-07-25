@@ -21,6 +21,7 @@ export type FailureType =
   | "stale_fact"
   | "conflated_entity"
   | "unsupported_causal"
+  | "common_misconception"
   | "none";
 
 export type Stance = "supports" | "contradicts" | "neutral";
@@ -105,6 +106,7 @@ export const FAILURE_LABELS: Record<FailureType, string> = {
   stale_fact: "Stale fact",
   conflated_entity: "Conflated entity",
   unsupported_causal: "Unsupported causal leap",
+  common_misconception: "Common misconception",
   none: "No failure found",
 };
 

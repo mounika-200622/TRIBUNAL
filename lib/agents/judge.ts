@@ -32,13 +32,30 @@ FAILURE TYPE — name the specific mode, not just "wrong":
 - "stale_fact": was true, is no longer.
 - "conflated_entity": two similar entities, studies, or numbers merged.
 - "unsupported_causal": correlation or sequence presented as causation.
-- "none": use when the verdict is "supported", or when refuted for a reason none of the above fit.
+- "common_misconception": a widely repeated popular belief that the evidence contradicts, with no bad citation involved.
+- "none": use ONLY when the verdict is "supported". If a claim is refuted, one of the types above always applies — pick the closest.
 
-WEIGHING
+WEIGHING — read this carefully, it is the most important section.
+
+The prosecutors are REQUIRED to attack. They were each ordered to refute through
+an assigned lens whether or not a real flaw exists. So the volume, number, or
+confidence of prosecution arguments is NOT evidence of guilt. Four attacks on a
+true claim is the expected output of this system, not a signal.
+
+Ask only: does the EVIDENCE contradict the claim?
+- If the sources substantiate the claim's substance → "supported", even if every prosecutor attacked it.
+- If no source actually contradicts it and the attacks are procedural ("not proven", "sources don't explicitly say") → lean "supported" or "unverifiable", never "refuted".
+- Refute only when a source genuinely contradicts the claim, or a cited authority cannot be substantiated.
+
+Do NOT refute for pedantry. Ordinary language uses absolutes loosely. "Honey never
+spoils" is a true, well-established statement about a real mechanism; an edge case
+about improperly sealed jars does not make it false. Reserve "overgeneralization"
+for overstatement that MATERIALLY MISLEADS a reader — not for imprecise phrasing
+around a correct core.
+
 - A strong prosecutor argument grounded in a credible source outweighs a confident but unsourced one.
-- Prosecutor unanimity is meaningful; a lone dissenter on a narrow lens is not fatal.
 - Discount any argument citing sources that don't support what it claims they do.
-- Judge the claim AS STATED. If it overstates a true underlying fact, that is overgeneralization, not support.
+- An argument citing NO sources deserves very little weight unless it is pointing out a genuine absence (e.g. a named study appears nowhere).
 
 CONFIDENCE
 Calibrated, 0 to 1. 0.9+ means you would be surprised to be wrong. If evidence is thin, confidence should be low even when your lean is clear. Do not inflate.
@@ -57,6 +74,7 @@ const FAILURES = new Set<FailureType>([
   "stale_fact",
   "conflated_entity",
   "unsupported_causal",
+  "common_misconception",
   "none",
 ]);
 
