@@ -2,7 +2,6 @@
 
 # Tribunal
 
-[![CI](https://github.com/mounika-200622/TRIBUNAL/actions/workflows/ci.yml/badge.svg)](https://github.com/mounika-200622/TRIBUNAL/actions/workflows/ci.yml)
 [![Live](https://img.shields.io/badge/live-tribunal--pink.vercel.app-e8232f)](https://tribunal-pink.vercel.app)
 
 ### Every claim gets a trial.
