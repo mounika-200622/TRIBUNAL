@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/*
+ * Courtroom, not dashboard. Deep near-black so the evidence graph glows, with
+ * verdict colours that mean exactly one thing each.
+ *
+ * TEAMMATE: this file is yours — extend freely. The three verdict colours and
+ * the ink/paper base are the only things the engine half assumes.
+ */
+@theme {
+  --color-void: #08090c;
+  --color-panel: #101319;
+  --color-line: #1e232d;
+  --color-paper: #eceef2;
+  --color-dim: #8b93a3;
+
+  --color-supported: #1fc16b;
+  --color-refuted: #ff5a5f;
+  --color-unverifiable: #ffc83a;
+  --color-accent: #7b61ff;
+
+  --font-display: var(--font-display), system-ui, sans-serif;
+  --font-body: var(--font-body), system-ui, sans-serif;
+}
+
+body {
+  background: var(--color-void);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
