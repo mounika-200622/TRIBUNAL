@@ -395,6 +395,7 @@ export function AsciiHero() {
 
   return (
     <div ref={wrapRef} className="tb-lock">
+      <a href="#intake" className="tb-skip">Skip to submission</a>
       <section className="tb-open">
         <canvas ref={canvasRef} className="tb-open-canvas" aria-hidden />
         <video

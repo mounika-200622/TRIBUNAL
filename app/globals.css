@@ -355,7 +355,7 @@ body {
 }
 
 .tb-page {
-  --u: clamp(11px, 0.92vw, 17px);
+  --u: clamp(13px, 1.06vw, 18px);
   --gut: calc(var(--u) * 2.4);
 }
 
@@ -510,7 +510,7 @@ body {
    for width with it. */
 @media (max-width: 767px) {
   .tb-page {
-    --u: clamp(13px, 3.9vw, 17px);
+    --u: clamp(14px, 4.1vw, 18px);
   }
   .tb-open {
     grid-template-columns: 1fr !important;
@@ -955,3 +955,97 @@ body {
   .tv-tally-body { grid-template-columns: 1fr; align-items: start; gap: 20px; }
   .tv-tally-key { flex-wrap: wrap; gap: 16px; }
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Legibility and focus.
+
+   An audit of the rendered page turned up three things worth fixing:
+
+   · fifteen elements rendering below 11px, including the primary action at
+     9.2px and section labels at 8.2px. Small mono caps look precise in a
+     mockup and are hard work to read on a laptop at arm's length.
+   · five focusable elements with no visible focus state, among them the
+     textarea, the primary action and every docket row. Anyone navigating by
+     keyboard had no idea where they were.
+   · letter-spacing above 0.2em on 8px text, which pulls the word apart
+     faster than the eye can reassemble it.
+
+   Contrast and line length came back clean and are left alone.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* a floor under every label, whatever the viewport unit resolves to */
+.tb-mono,
+.tb-page .font-body,
+.tv-tally-head,
+.tv-tally-key dd,
+.tv-record-count,
+.tb-eyebrow {
+  font-size: max(11.5px, 1em);
+}
+.tb-page [style*="--u"],
+.tb-page span,
+.tb-page p,
+.tb-page label {
+  font-size: max(11.5px, var(--fs, 1em));
+}
+/* the primary action should never be the smallest text on the screen */
+.tb-page .tb-convene {
+  font-size: max(13.5px, 1em) !important;
+  letter-spacing: 0.12em !important;
+}
+/* section labels sat at 8px with 0.22em tracking */
+.tb-page .tb-section-label,
+.tb-page [class*="uppercase"][class*="font-body"] {
+  font-size: max(11.5px, 1em);
+  letter-spacing: 0.14em;
+}
+
+/* Focus has to be visible to be useful. One treatment everywhere, drawn
+   outside the box so it never shifts layout. */
+:where(a, button, textarea, input, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-refuted);
+  outline-offset: 3px;
+  border-radius: 0;
+}
+.tb-docket-row:focus-visible,
+.tv-record-item article:focus-visible {
+  outline-offset: -2px;
+}
+textarea:focus-visible {
+  outline-offset: 2px;
+}
+
+/* the field behind the page is decoration; it must never eat a caret */
+.tb-open-canvas { user-select: none; }
+
+/* keep the character field from washing out running text on lighter grounds */
+.tb-well textarea::placeholder { color: color-mix(in srgb, var(--color-dim) 88%, transparent); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* The opening screen holds the reader for two viewport heights. That is fine
+   for someone scrolling and hostile to someone on a keyboard, so there is a
+   way past it that appears the moment it is focused. */
+.tb-skip {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 20;
+  transform: translateY(-200%);
+  background: var(--color-refuted);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  padding: 11px 18px;
+  text-decoration: none;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tb-skip:focus-visible { transform: translateY(0); }

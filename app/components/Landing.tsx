@@ -86,7 +86,7 @@ export function Landing({
     <>
       <AsciiHero />
 
-      <div className="tb-page relative z-10">
+      <div id="intake" className="tb-page relative z-10">
         <div aria-hidden className="tb-grain" />
 
       <div
@@ -100,13 +100,13 @@ export function Landing({
         >
           <span
             className="font-body uppercase text-paper"
-            style={{ fontSize: "calc(var(--u) * 0.78)", letterSpacing: "0.34em" }}
+            style={{ fontSize: "calc(var(--u) * 0.888)", letterSpacing: "0.34em" }}
           >
             Tribunal
           </span>
           <span
             className="font-body uppercase text-dim"
-            style={{ fontSize: "calc(var(--u) * 0.7)", letterSpacing: "0.2em" }}
+            style={{ fontSize: "calc(var(--u) * 0.88)", letterSpacing: "0.2em" }}
           >
             4 prosecutors · 1 defense · 1 judge
           </span>
@@ -122,7 +122,7 @@ export function Landing({
             paddingBottom: "calc(var(--u) * 3.2)",
           }}
         >
-          <h1
+          <h2
             className="tb-mask font-display text-paper"
             style={{
               fontSize: "calc(var(--u) * 4.5)",
@@ -136,7 +136,7 @@ export function Landing({
             <em className="italic" style={{ color: "var(--color-refuted)" }}>
               cross&#8209;examined.
             </em>
-          </h1>
+          </h2>
 
           <p
             className="tb-mask font-body text-dim"
@@ -160,7 +160,7 @@ export function Landing({
           <label
             htmlFor="claim"
             className="block font-body uppercase text-dim"
-            style={{ fontSize: "calc(var(--u) * 0.7)", letterSpacing: "0.22em" }}
+            style={{ fontSize: "calc(var(--u) * 0.88)", letterSpacing: "0.22em" }}
           >
             Submission
           </label>
@@ -175,7 +175,7 @@ export function Landing({
             rows={4}
             className="w-full resize-y bg-transparent font-serif text-paper outline-none placeholder:text-dim/70"
             style={{
-              marginTop: "calc(var(--u) * 0.7)",
+              marginTop: "calc(var(--u) * 0.88)",
               fontSize: "calc(var(--u) * 1.32)",
               lineHeight: 1.5,
               borderBottom: "1px solid var(--color-line)",
@@ -197,7 +197,7 @@ export function Landing({
               style={{
                 x,
                 y,
-                fontSize: "calc(var(--u) * 0.78)",
+                fontSize: "calc(var(--u) * 0.888)",
                 letterSpacing: "0.2em",
               }}
             >
@@ -230,7 +230,7 @@ export function Landing({
         >
           <h2
             className="font-body uppercase text-dim"
-            style={{ fontSize: "calc(var(--u) * 0.7)", letterSpacing: "0.22em" }}
+            style={{ fontSize: "calc(var(--u) * 0.88)", letterSpacing: "0.22em" }}
           >
             Or take one from the docket
           </h2>
@@ -247,7 +247,7 @@ export function Landing({
                 >
                   <span
                     className="tb-docket-label font-body"
-                    style={{ fontSize: "calc(var(--u) * 0.72)", letterSpacing: "0.16em" }}
+                    style={{ fontSize: "calc(var(--u) * 0.88)", letterSpacing: "0.16em" }}
                   >
                     {x.ref}
                   </span>
@@ -259,7 +259,7 @@ export function Landing({
                   </span>
                   <span
                     className="font-body text-dim"
-                    style={{ fontSize: "calc(var(--u) * 0.76)" }}
+                    style={{ fontSize: "calc(var(--u) * 0.9)" }}
                   >
                     {x.note}
                   </span>
