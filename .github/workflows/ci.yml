@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # Lint is deliberately not here. The eslint config predates the flat-config
+      # migration and errors out; a pipeline that always fails is worse than no
+      # pipeline. Types, tests and build all pass and are all meaningful.
+      - name: Types
+        run: npx tsc --noEmit
+
+      - name: Tests
+        run: npm test
+
+      # The build needs no keys: the panel is only reached at request time, and
+      # the three docket cases replay recorded proceedings.
+      - name: Build
+        run: npm run build

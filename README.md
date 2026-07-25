@@ -2,6 +2,9 @@
 
 # Tribunal
 
+[![CI](https://github.com/mounika-200622/TRIBUNAL/actions/workflows/ci.yml/badge.svg)](https://github.com/mounika-200622/TRIBUNAL/actions/workflows/ci.yml)
+[![Live](https://img.shields.io/badge/live-tribunal--pink.vercel.app-e8232f)](https://tribunal-pink.vercel.app)
+
 ### Every claim gets a trial.
 
 **Paste any AI answer. Claims are extracted, prosecuted by an adversarial panel, defended, and ruled on — with sources, a named failure mode, and calibrated confidence.**
@@ -149,6 +152,35 @@ The cause was structural: the judge saw four attacks against one defense and rea
 A fact-checker that refutes true claims is worse than no fact-checker. This was the most important fix in the project.
 
 ---
+
+## What it costs, and what breaks first
+
+Measured, then derived, with the arithmetic left visible in
+**[docs/scale.md](docs/scale.md)**.
+
+| | |
+|---|---|
+| Model calls per claim | **6** — 4 prosecutors, 1 defense, 1 judge |
+| Retrieval calls per claim | **1**, shared by all six |
+| Median time to a full ruling | **4.1s**, agents in parallel |
+| Cost per claim | single-digit cents, the judge dominating |
+
+The first thing to break is not inference, it is **provider rate limits, which
+are per key and per model**. We know because one evaluation sweep exhausted a
+100k token-per-day allowance. `lib/config.ts` carries the answer: a chain that
+walks the preferred model across every key before dropping a tier. That is not
+a plan for scaling, it is the code, and it exists because the limit was real.
+
+## Tests
+
+```bash
+npm test
+```
+
+Ten tests over the reducer and the trust score. The UI is a fold over the event
+stream, so the reducer is the one place a bug corrupts every screen at once:
+the tests cover stray events for unknown claims, duplicate verdicts, argument
+attribution, and the bounds of the score.
 
 ## Known limitations
 
