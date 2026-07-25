@@ -56,3 +56,486 @@ body {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* =========================================================
+   Landing page atmosphere — circuit grid, glow orbs, scanline,
+   status dot, and traveling light particles.
+   Scoped with a `tribunal-` prefix so nothing here collides
+   with the design tokens above (used by the other views).
+   ========================================================= */
+
+.tribunal-grid-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: linear-gradient(rgba(120, 160, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 160, 255, 0.07) 1px, transparent 1px);
+  background-size: 42px 42px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 20%, transparent 85%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 20%, transparent 85%);
+}
+
+.tribunal-glow-orb {
+  position: fixed;
+  z-index: 0;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.35;
+  animation: tribunal-drift 24s ease-in-out infinite;
+}
+.tribunal-glow-orb.o1 {
+  width: 480px;
+  height: 480px;
+  background: #3fe0ff;
+  top: -12%;
+  left: -8%;
+}
+.tribunal-glow-orb.o2 {
+  width: 420px;
+  height: 420px;
+  background: #a86bff;
+  top: 20%;
+  right: -10%;
+  animation-delay: -8s;
+}
+.tribunal-glow-orb.o3 {
+  width: 380px;
+  height: 380px;
+  background: #ffb020;
+  bottom: -10%;
+  left: 30%;
+  animation-delay: -15s;
+}
+@keyframes tribunal-drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(30px, -40px);
+  }
+}
+
+.tribunal-scanline {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 140px;
+  z-index: 1;
+  background: linear-gradient(180deg, transparent, rgba(63, 224, 255, 0.06), transparent);
+  animation: tribunal-scandown 9s linear infinite;
+  pointer-events: none;
+}
+@keyframes tribunal-scandown {
+  0% {
+    top: -140px;
+  }
+  100% {
+    top: 100vh;
+  }
+}
+
+.tribunal-submit-btn {
+  box-shadow: 0 0 30px -6px rgba(63, 224, 255, 0.6);
+}
+.tribunal-submit-btn:hover {
+  box-shadow: 0 0 40px -4px rgba(63, 224, 255, 0.85);
+}
+
+.tribunal-arg-card {
+  box-shadow: 0 16px 34px -20px rgba(0, 0, 0, 0.65);
+  transition: box-shadow 0.2s ease;
+}
+.tribunal-arg-card.prosecutor {
+  box-shadow: 0 0 30px -10px rgba(255, 90, 95, 0.55), 0 16px 34px -20px rgba(0, 0, 0, 0.65);
+}
+.tribunal-arg-card.defender {
+  box-shadow: 0 0 30px -10px rgba(31, 193, 107, 0.55), 0 16px 34px -20px rgba(0, 0, 0, 0.65);
+}
+
+.tribunal-dot-live {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: #2be6a6;
+  box-shadow: 0 0 8px 2px rgba(43, 230, 166, 0.7);
+  animation: tribunal-pulse 1.8s infinite;
+}
+@keyframes tribunal-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(43, 230, 166, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 9px rgba(43, 230, 166, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(43, 230, 166, 0);
+  }
+}
+
+.tribunal-traveler {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: #3fe0ff;
+  box-shadow: 0 0 8px 2px rgba(63, 224, 255, 0.9), 0 0 18px 5px rgba(63, 224, 255, 0.35);
+}
+.tribunal-traveler.violet {
+  background: #a86bff;
+  box-shadow: 0 0 8px 2px rgba(168, 107, 255, 0.9), 0 0 18px 5px rgba(168, 107, 255, 0.3);
+}
+.tribunal-traveler.amber {
+  background: #ffb020;
+  box-shadow: 0 0 8px 2px rgba(255, 176, 32, 0.9), 0 0 18px 5px rgba(255, 176, 32, 0.3);
+}
+.tribunal-traveler.h {
+  animation-name: tribunal-travel-h;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.tribunal-traveler.v {
+  animation-name: tribunal-travel-v;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.tribunal-traveler.h.reverse {
+  animation-name: tribunal-travel-h-rev;
+}
+.tribunal-traveler.v.reverse {
+  animation-name: tribunal-travel-v-rev;
+}
+@keyframes tribunal-travel-h {
+  0% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(calc(100vw + 20px));
+    opacity: 0;
+  }
+}
+@keyframes tribunal-travel-v {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(calc(100vh + 20px));
+    opacity: 0;
+  }
+}
+@keyframes tribunal-travel-h-rev {
+  0% {
+    transform: translateX(calc(100vw + 20px));
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+}
+@keyframes tribunal-travel-v-rev {
+  0% {
+    transform: translateY(calc(100vh + 20px));
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+}
+
+/* =========================================================
+   Verdict seal — the rotating instrument-dial on the final
+   "trust score" screen. Prefixed with `tv-` since it's specific
+   to that one view.
+   ========================================================= */
+
+.tv-stage {
+  position: relative;
+  z-index: 2;
+  min-height: calc(100vh - 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 40px 20px 80px;
+}
+
+.tv-seal {
+  position: relative;
+  width: 440px;
+  height: 440px;
+  max-width: 90vw;
+  max-height: 90vw;
+}
+
+.tv-seal-ring {
+  position: absolute;
+  inset: 0;
+  animation: tv-rotate-slow 90s linear infinite;
+}
+@keyframes tv-rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tv-seal svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.tv-tick {
+  stroke: rgba(120, 160, 255, 0.22);
+  stroke-width: 1.5;
+}
+.tv-tick.major {
+  stroke: rgba(120, 160, 255, 0.4);
+  stroke-width: 2;
+}
+
+.tv-arc-track {
+  fill: none;
+  stroke: rgba(120, 160, 255, 0.12);
+  stroke-width: 3;
+}
+.tv-arc-progress {
+  fill: none;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+.tv-orbit-marker {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px 3px currentColor;
+  transform: translate(-50%, -50%);
+}
+.tv-orbit-marker .tv-core {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: currentColor;
+}
+
+.tv-core-readout {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+.tv-core-label {
+  font-size: 10.5px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #7c88a8;
+  margin-bottom: 6px;
+}
+.tv-core-score {
+  font-family: var(--font-display), serif;
+  font-weight: 700;
+  font-size: 96px;
+  line-height: 0.95;
+}
+.tv-core-score.tier-low {
+  background: linear-gradient(160deg, #ff5470, #ff8a9a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 40px rgba(255, 84, 112, 0.35);
+}
+.tv-core-score.tier-mid {
+  background: linear-gradient(160deg, #ffb020, #ff8a3d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 40px rgba(255, 176, 32, 0.35);
+}
+.tv-core-score.tier-high {
+  background: linear-gradient(160deg, #2be6a6, #7dffce);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 40px rgba(43, 230, 166, 0.35);
+}
+.tv-core-max {
+  font-size: 13px;
+  color: #7c88a8;
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+
+.tv-verdict-line {
+  max-width: 560px;
+  text-align: center;
+  margin-top: 8px;
+}
+.tv-verdict-line h2 {
+  font-family: var(--font-display), serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 26px;
+  color: #fff;
+  margin: 0 0 14px;
+  line-height: 1.3;
+}
+.tv-verdict-line h2 .tv-accent {
+  background: linear-gradient(100deg, #3fe0ff, #a86bff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-style: normal;
+}
+
+.tv-chip-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.tv-chip {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(120, 160, 255, 0.2);
+  background: rgba(17, 22, 41, 0.5);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7c88a8;
+}
+.tv-chip .tv-swatch {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+}
+.tv-chip.supported .tv-swatch {
+  background: #2be6a6;
+  box-shadow: 0 0 6px 1px rgba(43, 230, 166, 0.7);
+}
+.tv-chip.refuted .tv-swatch {
+  background: #ff5470;
+  box-shadow: 0 0 6px 1px rgba(255, 84, 112, 0.7);
+}
+.tv-chip.unverifiable .tv-swatch {
+  background: #ffb020;
+  box-shadow: 0 0 6px 1px rgba(255, 176, 32, 0.7);
+}
+.tv-chip b {
+  color: #dfe6f5;
+  font-weight: 600;
+}
+
+.tv-actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 14px;
+}
+.tv-ghost-btn {
+  font-family: var(--font-body), monospace;
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #dfe6f5;
+  background: transparent;
+  border: 1px solid rgba(120, 160, 255, 0.3);
+  border-radius: 24px;
+  padding: 12px 26px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tv-ghost-btn:hover {
+  border-color: #3fe0ff;
+  color: #3fe0ff;
+  box-shadow: 0 0 24px -6px rgba(63, 224, 255, 0.5);
+  transform: translateY(-2px);
+}
+.tv-ghost-btn.primary {
+  border-color: transparent;
+  background: linear-gradient(100deg, #3fe0ff, #2be6a6);
+  color: #04141b;
+  box-shadow: 0 0 30px -6px rgba(63, 224, 255, 0.6);
+}
+.tv-ghost-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px -4px rgba(63, 224, 255, 0.85);
+  color: #04141b;
+}
+.tv-ghost-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+  transform: none !important;
+}
+
+.tv-stamp {
+  margin-top: 26px;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #7c88a8;
+  opacity: 0.7;
+}
+
+@media (max-width: 520px) {
+  .tv-seal {
+    width: 320px;
+    height: 320px;
+  }
+  .tv-core-score {
+    font-size: 66px;
+  }
+  .tv-verdict-line h2 {
+    font-size: 20px;
+  }
+}

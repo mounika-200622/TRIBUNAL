@@ -105,7 +105,7 @@ export function EvidenceGraph({ state }: { state: TribunalState }) {
           width={size.width}
           height={size.height}
           graphData={graphData}
-          backgroundColor="#08090c"
+          backgroundColor="rgba(15,20,38,0.55)"
           nodeRelSize={4}
           cooldownTicks={reducedMotion ? 0 : Infinity}
           linkColor={(l: any) => STANCE_COLOR[l.stance] ?? "#8b93a3"}

@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import { Sora, Inter } from "next/font/google";
+import { Fraunces, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const display = Sora({
+const display = Fraunces({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: ["600", "700"],
+  style: ["normal", "italic"],
 });
-const body = Inter({
+const body = IBM_Plex_Mono({
   variable: "--font-body",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
