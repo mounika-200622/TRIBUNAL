@@ -1,0 +1,954 @@
+{
+  "generatedAt": "2026-07-25T06:56:48.362Z",
+  "model": "llama-3.3-70b-versatile",
+  "note": "All arms share retrieval and model; only reasoning architecture varies.",
+  "arms": [
+    {
+      "arm": "single",
+      "n": 28,
+      "accuracy": 0.429,
+      "accuracyOnTrue": 0.875,
+      "accuracyOnFalse": 0.25,
+      "falsePositiveRate": 0.125,
+      "failureTypeAccuracy": 0.2,
+      "calibration": [
+        {
+          "band": "50–70%",
+          "n": 15,
+          "meanConfidence": 0.5,
+          "accuracy": 0
+        },
+        {
+          "band": "70–80%",
+          "n": 1,
+          "meanConfidence": 0.7,
+          "accuracy": 0
+        },
+        {
+          "band": "80–90%",
+          "n": 5,
+          "meanConfidence": 0.8,
+          "accuracy": 1
+        },
+        {
+          "band": "90–100%",
+          "n": 7,
+          "meanConfidence": 0.929,
+          "accuracy": 1
+        }
+      ]
+    },
+    {
+      "arm": "sequential",
+      "n": 28,
+      "accuracy": 0.321,
+      "accuracyOnTrue": 0.75,
+      "accuracyOnFalse": 0.15,
+      "falsePositiveRate": 0.125,
+      "failureTypeAccuracy": 0.333,
+      "calibration": [
+        {
+          "band": "50–70%",
+          "n": 17,
+          "meanConfidence": 0.5,
+          "accuracy": 0
+        },
+        {
+          "band": "70–80%",
+          "n": 1,
+          "meanConfidence": 0.7,
+          "accuracy": 0
+        },
+        {
+          "band": "80–90%",
+          "n": 1,
+          "meanConfidence": 0.8,
+          "accuracy": 0
+        },
+        {
+          "band": "90–100%",
+          "n": 9,
+          "meanConfidence": 0.911,
+          "accuracy": 1
+        }
+      ]
+    },
+    {
+      "arm": "adversarial",
+      "n": 28,
+      "accuracy": 0.964,
+      "accuracyOnTrue": 0.875,
+      "accuracyOnFalse": 1,
+      "falsePositiveRate": 0.125,
+      "failureTypeAccuracy": 0.55,
+      "calibration": [
+        {
+          "band": "50–70%",
+          "n": 0,
+          "meanConfidence": null,
+          "accuracy": null
+        },
+        {
+          "band": "70–80%",
+          "n": 0,
+          "meanConfidence": null,
+          "accuracy": null
+        },
+        {
+          "band": "80–90%",
+          "n": 2,
+          "meanConfidence": 0.86,
+          "accuracy": 0.5
+        },
+        {
+          "band": "90–100%",
+          "n": 26,
+          "meanConfidence": 0.973,
+          "accuracy": 1
+        }
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "id": "t1",
+      "claim": "Honey does not spoil because its low water content and acidity prevent microbial growth.",
+      "truth": "supported",
+      "expectedFailure": null,
+      "arms": {
+        "single": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 0.9,
+          "correct": true,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 0.9,
+          "correct": true,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 0.96,
+          "correct": true,
+          "failureCorrect": null,
+          "disagreement": 0.8
+        }
+      }
+    },
+    {
+      "id": "t2",
+      "claim": "Water boils at 100 degrees Celsius at sea level under standard atmospheric pressure.",
+      "truth": "supported",
+      "expectedFailure": null,
+      "arms": {
+        "single": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 0.95,
+          "correct": true,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 0.95,
+          "correct": true,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 0.99,
+          "correct": true,
+          "failureCorrect": null,
+          "disagreement": 0
+        }
+      }
+    },
+    {
+      "id": "t3",
+      "claim": "Bananas are naturally slightly radioactive because they contain potassium-40.",
+      "truth": "supported",
+      "expectedFailure": null,
+      "arms": {
+        "single": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 0.9,
+          "correct": true,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 0.9,
+          "correct": true,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 0.99,
+          "correct": true,
+          "failureCorrect": null,
+          "disagreement": 0.72
+        }
+      }
+    },
+    {
+      "id": "t4",
+      "claim": "Octopuses have three hearts.",
+      "truth": "supported",
+      "expectedFailure": null,
+      "arms": {
+        "single": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 1,
+          "correct": true,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 0.95,
+          "correct": true,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 0.99,
+          "correct": true,
+          "failureCorrect": null,
+          "disagreement": 0.5
+        }
+      }
+    },
+    {
+      "id": "t5",
+      "claim": "The Eiffel Tower can grow about 15 centimetres taller in summer due to thermal expansion.",
+      "truth": "supported",
+      "expectedFailure": null,
+      "arms": {
+        "single": {
+          "verdict": "refuted",
+          "failureType": "overgeneralization",
+          "confidence": 0.7,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "refuted",
+          "failureType": "overgeneralization",
+          "confidence": 0.7,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "conflated_entity",
+          "confidence": 0.86,
+          "correct": false,
+          "failureCorrect": null,
+          "disagreement": 0.24
+        }
+      }
+    },
+    {
+      "id": "t6",
+      "claim": "Nicholas Bloom's study of the Chinese travel company Ctrip found that working from home increased productivity by about 13%.",
+      "truth": "supported",
+      "expectedFailure": null,
+      "arms": {
+        "single": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 0.9,
+          "correct": true,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.8,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 0.98,
+          "correct": true,
+          "failureCorrect": null,
+          "disagreement": 0.36
+        }
+      }
+    },
+    {
+      "id": "t7",
+      "claim": "Vaccines train the immune system by exposing it to a harmless form or fragment of a pathogen.",
+      "truth": "supported",
+      "expectedFailure": null,
+      "arms": {
+        "single": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 0.95,
+          "correct": true,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 0.9,
+          "correct": true,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 0.98,
+          "correct": true,
+          "failureCorrect": null,
+          "disagreement": 0.33
+        }
+      }
+    },
+    {
+      "id": "t8",
+      "claim": "Light takes about eight minutes to travel from the Sun to the Earth.",
+      "truth": "supported",
+      "expectedFailure": null,
+      "arms": {
+        "single": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 0.9,
+          "correct": true,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 0.9,
+          "correct": true,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "supported",
+          "failureType": "none",
+          "confidence": 0.99,
+          "correct": true,
+          "failureCorrect": null,
+          "disagreement": 0.71
+        }
+      }
+    },
+    {
+      "id": "f1",
+      "claim": "A 2019 Stanford study found that remote workers are 43% more productive than office workers.",
+      "truth": "refuted",
+      "expectedFailure": "fabricated_citation",
+      "arms": {
+        "single": {
+          "verdict": "refuted",
+          "failureType": "misattribution",
+          "confidence": 0.8,
+          "correct": true,
+          "failureCorrect": false
+        },
+        "sequential": {
+          "verdict": "refuted",
+          "failureType": "unsupported_causal",
+          "confidence": 0.9,
+          "correct": true,
+          "failureCorrect": false
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "fabricated_citation",
+          "confidence": 0.94,
+          "correct": true,
+          "failureCorrect": true,
+          "disagreement": 0.57
+        }
+      }
+    },
+    {
+      "id": "f2",
+      "claim": "A 2021 Harvard Medical School paper concluded that drinking three cups of coffee daily reverses liver fibrosis.",
+      "truth": "refuted",
+      "expectedFailure": "fabricated_citation",
+      "arms": {
+        "single": {
+          "verdict": "refuted",
+          "failureType": "overgeneralization",
+          "confidence": 0.8,
+          "correct": true,
+          "failureCorrect": false
+        },
+        "sequential": {
+          "verdict": "refuted",
+          "failureType": "misattribution",
+          "confidence": 0.9,
+          "correct": true,
+          "failureCorrect": false
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "misattribution",
+          "confidence": 0.96,
+          "correct": true,
+          "failureCorrect": false,
+          "disagreement": 0.42
+        }
+      }
+    },
+    {
+      "id": "f3",
+      "claim": "According to a 2020 MIT study, people who read fiction have measurably higher IQ scores than people who read non-fiction.",
+      "truth": "refuted",
+      "expectedFailure": "fabricated_citation",
+      "arms": {
+        "single": {
+          "verdict": "refuted",
+          "failureType": "overgeneralization",
+          "confidence": 0.8,
+          "correct": true,
+          "failureCorrect": false
+        },
+        "sequential": {
+          "verdict": "refuted",
+          "failureType": "fabricated_citation",
+          "confidence": 0.9,
+          "correct": true,
+          "failureCorrect": true
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "fabricated_citation",
+          "confidence": 0.97,
+          "correct": true,
+          "failureCorrect": true,
+          "disagreement": 0.36
+        }
+      }
+    },
+    {
+      "id": "f4",
+      "claim": "Albert Einstein said that compound interest is the eighth wonder of the world.",
+      "truth": "refuted",
+      "expectedFailure": "misattribution",
+      "arms": {
+        "single": {
+          "verdict": "refuted",
+          "failureType": "misattribution",
+          "confidence": 0.8,
+          "correct": true,
+          "failureCorrect": true
+        },
+        "sequential": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "misattribution",
+          "confidence": 0.86,
+          "correct": true,
+          "failureCorrect": true,
+          "disagreement": 0.26
+        }
+      }
+    },
+    {
+      "id": "f5",
+      "claim": "Thomas Edison invented the first electric light bulb.",
+      "truth": "refuted",
+      "expectedFailure": "misattribution",
+      "arms": {
+        "single": {
+          "verdict": "refuted",
+          "failureType": "overgeneralization",
+          "confidence": 0.8,
+          "correct": true,
+          "failureCorrect": false
+        },
+        "sequential": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "common_misconception",
+          "confidence": 0.97,
+          "correct": true,
+          "failureCorrect": false,
+          "disagreement": 0
+        }
+      }
+    },
+    {
+      "id": "f6",
+      "claim": "Pluto is the ninth planet in our solar system.",
+      "truth": "refuted",
+      "expectedFailure": "stale_fact",
+      "arms": {
+        "single": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "stale_fact",
+          "confidence": 0.99,
+          "correct": true,
+          "failureCorrect": true,
+          "disagreement": 0
+        }
+      }
+    },
+    {
+      "id": "f7",
+      "claim": "The tallest building in the world is the Taipei 101.",
+      "truth": "refuted",
+      "expectedFailure": "stale_fact",
+      "arms": {
+        "single": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "stale_fact",
+          "confidence": 0.98,
+          "correct": true,
+          "failureCorrect": true,
+          "disagreement": 0
+        }
+      }
+    },
+    {
+      "id": "f8",
+      "claim": "The Nobel Prize in Mathematics is awarded every year in Stockholm.",
+      "truth": "refuted",
+      "expectedFailure": "conflated_entity",
+      "arms": {
+        "single": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "common_misconception",
+          "confidence": 0.96,
+          "correct": true,
+          "failureCorrect": false,
+          "disagreement": 0
+        }
+      }
+    },
+    {
+      "id": "f9",
+      "claim": "The human body contains 216 bones.",
+      "truth": "refuted",
+      "expectedFailure": "conflated_entity",
+      "arms": {
+        "single": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "common_misconception",
+          "confidence": 0.97,
+          "correct": true,
+          "failureCorrect": false,
+          "disagreement": 0
+        }
+      }
+    },
+    {
+      "id": "f10",
+      "claim": "Humans only use 10% of their brains.",
+      "truth": "refuted",
+      "expectedFailure": "overgeneralization",
+      "arms": {
+        "single": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "common_misconception",
+          "confidence": 0.99,
+          "correct": true,
+          "failureCorrect": false,
+          "disagreement": 0
+        }
+      }
+    },
+    {
+      "id": "f11",
+      "claim": "All fats are bad for cardiovascular health and should be eliminated from the diet.",
+      "truth": "refuted",
+      "expectedFailure": "overgeneralization",
+      "arms": {
+        "single": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "common_misconception",
+          "confidence": 0.99,
+          "correct": true,
+          "failureCorrect": false,
+          "disagreement": 0
+        }
+      }
+    },
+    {
+      "id": "f12",
+      "claim": "Antibiotics cure colds and flu.",
+      "truth": "refuted",
+      "expectedFailure": "overgeneralization",
+      "arms": {
+        "single": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "common_misconception",
+          "confidence": 0.99,
+          "correct": true,
+          "failureCorrect": false,
+          "disagreement": 0
+        }
+      }
+    },
+    {
+      "id": "f13",
+      "claim": "Video games cause violent behaviour in teenagers.",
+      "truth": "refuted",
+      "expectedFailure": "unsupported_causal",
+      "arms": {
+        "single": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "unsupported_causal",
+          "confidence": 0.91,
+          "correct": true,
+          "failureCorrect": true,
+          "disagreement": 0
+        }
+      }
+    },
+    {
+      "id": "f14",
+      "claim": "Vaccines cause autism.",
+      "truth": "refuted",
+      "expectedFailure": "unsupported_causal",
+      "arms": {
+        "single": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "common_misconception",
+          "confidence": 0.99,
+          "correct": true,
+          "failureCorrect": false,
+          "disagreement": 0
+        }
+      }
+    },
+    {
+      "id": "f15",
+      "claim": "Sugar consumption directly causes hyperactivity in children.",
+      "truth": "refuted",
+      "expectedFailure": "unsupported_causal",
+      "arms": {
+        "single": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "common_misconception",
+          "confidence": 0.93,
+          "correct": true,
+          "failureCorrect": false,
+          "disagreement": 0
+        }
+      }
+    },
+    {
+      "id": "f16",
+      "claim": "The Great Wall of China is visible from space with the naked eye.",
+      "truth": "refuted",
+      "expectedFailure": "common_misconception",
+      "arms": {
+        "single": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "common_misconception",
+          "confidence": 0.99,
+          "correct": true,
+          "failureCorrect": true,
+          "disagreement": 0
+        }
+      }
+    },
+    {
+      "id": "f17",
+      "claim": "Lightning never strikes the same place twice.",
+      "truth": "refuted",
+      "expectedFailure": "common_misconception",
+      "arms": {
+        "single": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "common_misconception",
+          "confidence": 0.98,
+          "correct": true,
+          "failureCorrect": true,
+          "disagreement": 0
+        }
+      }
+    },
+    {
+      "id": "f18",
+      "claim": "Goldfish have a memory span of only three seconds.",
+      "truth": "refuted",
+      "expectedFailure": "common_misconception",
+      "arms": {
+        "single": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "common_misconception",
+          "confidence": 0.97,
+          "correct": true,
+          "failureCorrect": true,
+          "disagreement": 0
+        }
+      }
+    },
+    {
+      "id": "f19",
+      "claim": "Humans and dinosaurs coexisted.",
+      "truth": "refuted",
+      "expectedFailure": "common_misconception",
+      "arms": {
+        "single": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "common_misconception",
+          "confidence": 0.97,
+          "correct": true,
+          "failureCorrect": true,
+          "disagreement": 0
+        }
+      }
+    },
+    {
+      "id": "f20",
+      "claim": "You lose most of your body heat through your head.",
+      "truth": "refuted",
+      "expectedFailure": "common_misconception",
+      "arms": {
+        "single": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "sequential": {
+          "verdict": "unverifiable",
+          "failureType": "none",
+          "confidence": 0.5,
+          "correct": false,
+          "failureCorrect": null
+        },
+        "adversarial": {
+          "verdict": "refuted",
+          "failureType": "common_misconception",
+          "confidence": 0.97,
+          "correct": true,
+          "failureCorrect": true,
+          "disagreement": 0
+        }
+      }
+    }
+  ]
+}

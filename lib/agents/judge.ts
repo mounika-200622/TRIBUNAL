@@ -2,7 +2,7 @@ import {
   FAST_MODEL,
   JUDGE_MODEL,
   JUDGE_ON_GROQ,
-  groq,
+  groqChat,
   hasOpenAI,
   openai,
 } from "../config";
@@ -124,16 +124,8 @@ export async function judgeClaim(claim: Claim, args: Argument[]): Promise<Ruling
     const body = transcript(claim, args, claim.sources);
     try {
       if (useGroq) {
-        const r = await groq().chat.completions.create({
-          model: FAST_MODEL,
-          messages: [
-            { role: "system", content: SYSTEM },
-            { role: "user", content: body },
-          ],
-          response_format: { type: "json_object" },
-          temperature: 0.2,
-        });
-        return JSON.parse(r.choices[0]?.message?.content ?? "{}");
+        const { content } = await groqChat(SYSTEM, body, { temperature: 0.2 });
+        return JSON.parse(content || "{}");
       }
 
       // Low reasoning effort: a verdict on a laid-out contest is a judgement

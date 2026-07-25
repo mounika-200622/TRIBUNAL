@@ -1,4 +1,4 @@
-import { FAST_MODEL, groq } from "../config";
+import { FAST_MODEL, groqChat } from "../config";
 import { cached, keyOf } from "../cache";
 import type { Claim, FailureType, VerdictKind } from "../types";
 import type { Ruling } from "./judge";
@@ -56,16 +56,8 @@ function coerce(out: Record<string, unknown>): Ruling {
 }
 
 async function chat(system: string, user: string, json = true) {
-  const r = await groq().chat.completions.create({
-    model: FAST_MODEL,
-    messages: [
-      { role: "system", content: system },
-      { role: "user", content: user },
-    ],
-    ...(json ? { response_format: { type: "json_object" as const } } : {}),
-    temperature: 0.2,
-  });
-  return r.choices[0]?.message?.content ?? "";
+  const { content } = await groqChat(system, user, { json, temperature: 0.2 });
+  return content;
 }
 
 /** ARM A — one verifier, one pass. */

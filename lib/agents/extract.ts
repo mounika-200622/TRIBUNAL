@@ -1,4 +1,4 @@
-import { FAST_MODEL, MAX_CLAIMS, groq } from "../config";
+import { FAST_MODEL, MAX_CLAIMS, groqChat } from "../config";
 import { cached, keyOf } from "../cache";
 import type { Claim } from "../types";
 
@@ -28,17 +28,8 @@ export async function extractClaims(input: string): Promise<Claim[]> {
   const key = keyOf("extract", FAST_MODEL, MAX_CLAIMS, input);
 
   const texts = await cached(key, async () => {
-    const r = await groq().chat.completions.create({
-      model: FAST_MODEL,
-      messages: [
-        { role: "system", content: SYSTEM },
-        { role: "user", content: input },
-      ],
-      response_format: { type: "json_object" },
-      temperature: 0.2,
-    });
+    const { content: raw } = await groqChat(SYSTEM, input, { temperature: 0.2 });
 
-    const raw = r.choices[0]?.message?.content ?? "{}";
     let parsed: { claims?: { text?: string }[] };
     try {
       parsed = JSON.parse(raw);

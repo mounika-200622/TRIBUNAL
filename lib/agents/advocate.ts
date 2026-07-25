@@ -1,4 +1,4 @@
-import { FAST_MODEL, groq } from "../config";
+import { FAST_MODEL, groqChat } from "../config";
 import { cached, keyOf } from "../cache";
 import type { Argument, Claim, Source } from "../types";
 
@@ -94,19 +94,12 @@ async function runAdvocate(
 
   const out = await cached(key, async () => {
     try {
-      const r = await groq().chat.completions.create({
-        model: FAST_MODEL,
-        messages: [
-          { role: "system", content: prompt(role, lens) },
-          {
-            role: "user",
-            content: `CLAIM UNDER TRIAL:\n"${claim.text}"\n\nSOURCES:\n${sourceBlock(claim.sources)}`,
-          },
-        ],
-        response_format: { type: "json_object" },
-        temperature: 0.4,
-      });
-      return JSON.parse(r.choices[0]?.message?.content ?? "{}") as {
+      const { content } = await groqChat(
+        prompt(role, lens),
+        `CLAIM UNDER TRIAL:\n"${claim.text}"\n\nSOURCES:\n${sourceBlock(claim.sources)}`,
+        { temperature: 0.4 },
+      );
+      return JSON.parse(content || "{}") as {
         position?: string;
         sourceIds?: string[];
         strength?: number;
