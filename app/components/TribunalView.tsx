@@ -12,7 +12,10 @@ export function TribunalView({ state }: { state: TribunalState }) {
   return (
     <div className="relative z-10 flex h-screen flex-col">
       <header className="flex items-center justify-between border-b border-line px-6 py-3">
-        <h1 className="font-display text-lg font-bold">Tribunal</h1>
+        <h1 className="flex items-center gap-2.5 font-display text-lg font-bold">
+          <span className="tribunal-dot-live" />
+          Tribunal
+        </h1>
         <p className="font-mono text-xs uppercase tracking-wide text-dim">
           {c.settled}/{c.total} settled · {c.supported} supported ·{" "}
           {c.refuted} refuted · {c.unverifiable} unverifiable
