@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FIXTURES } from "@/lib/fixtures";
-import type { StreamEvent } from "@/lib/types";
+import { FIXTURES, type Fixture } from "@/lib/fixtures";
 
 const PRESETS = [
   { tag: "SAMPLE 01", chip: "Audit a ChatGPT answer", fixtureId: "fabrication" },
@@ -10,7 +9,11 @@ const PRESETS = [
   { tag: "SAMPLE 03", chip: "Try a tricky one", fixtureId: "clean" },
 ];
 
-export function Landing({ onStart }: { onStart: (events?: StreamEvent[]) => void }) {
+export function Landing({
+  onStart,
+}: {
+  onStart: (text: string, fixture?: Fixture) => void;
+}) {
   const [text, setText] = useState("");
   const [fixtureId, setFixtureId] = useState<string | null>(null);
 
@@ -23,8 +26,11 @@ export function Landing({ onStart }: { onStart: (events?: StreamEvent[]) => void
 
   const handleStart = () => {
     if (!text.trim()) return;
-    const fixture = FIXTURES.find((f) => f.id === fixtureId);
-    onStart(fixture?.events);
+    // A preset still counts as a preset only while its text is untouched — edit
+    // it and the trial should go to the real engine, not replay a recording of
+    // something you no longer typed.
+    const fixture = FIXTURES.find((f) => f.id === fixtureId && f.text === text);
+    onStart(text, fixture);
   };
 
   return (
@@ -34,7 +40,7 @@ export function Landing({ onStart }: { onStart: (events?: StreamEvent[]) => void
           <span>SYSTEM // TRIBUNAL‑CORE v2.6</span>
           <span className="flex items-center gap-2 font-semibold text-[#2be6a6]">
             <span className="tribunal-dot-live" />
-            12 agents online
+            6 agents per claim
           </span>
         </div>
 
@@ -51,9 +57,9 @@ export function Landing({ onStart }: { onStart: (events?: StreamEvent[]) => void
             </em>
           </h1>
           <p className="mx-auto mt-5 max-w-[540px] text-[14.5px] leading-[1.75] text-[#7c88a8]">
-            Submit any claim or AI-generated answer. Twelve independent agents research it in
-            parallel, trace it to primary sources, and converge on a verdict — typically in under
-            four seconds.
+            Submit any claim or AI-generated answer. Each claim is decomposed, then faces four
+            prosecutors and a defense arguing in parallel before a judge rules — traced to
+            primary sources, typically in seconds.
           </p>
         </div>
 
@@ -86,7 +92,7 @@ export function Landing({ onStart }: { onStart: (events?: StreamEvent[]) => void
             ▶ Run Verification
           </button>
           <span className="mt-3.5 block text-[11px] tracking-[.1em] text-[#7c88a8]">
-            12 agents · parallel research · full source trace
+            4 prosecutors · 1 defense · 1 judge · every claim source-traced
           </span>
         </div>
 
@@ -112,7 +118,7 @@ export function Landing({ onStart }: { onStart: (events?: StreamEvent[]) => void
 
         {/* footer */}
         <div className="border-t border-[rgba(120,160,255,.15)] pt-4 text-center text-[11px] uppercase tracking-[.2em] text-[#7c88a8]">
-          <b className="text-[#3fe0ff]">12 agents</b> &nbsp;·&nbsp; <b className="text-[#3fe0ff]">~4s</b> avg
+          <b className="text-[#3fe0ff]">6 agents / claim</b> &nbsp;·&nbsp; <b className="text-[#3fe0ff]">~4s</b> avg
           verification &nbsp;·&nbsp; every claim <b className="text-[#3fe0ff]">source‑traced</b>
         </div>
     </div>
