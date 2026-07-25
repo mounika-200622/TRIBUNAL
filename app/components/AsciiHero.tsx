@@ -66,7 +66,7 @@ export function AsciiHero() {
     let W = 0, H = 0, cols = 0, rows = 0, dpr = 1, wordPx = 10;
     let lum!: Float32Array, curl!: Float32Array;
     let vx!: Float32Array, vy!: Float32Array, nx!: Float32Array, ny!: Float32Array;
-    let mcx = -999, mcy = -999, pmx = 0, pmy = 0, haveM = false;
+    let mcx = -999, mcy = -999, pmx = 0, pmy = 0, haveM = false, lastMove = 0;
     let lastGrab = 0, lastDraw = 0, reveal = 0, tagOn = false;
     let fade = 1, inHero = true;
     let lockTop = 0, lockPx = 1, lockEnd = 0;
@@ -223,6 +223,16 @@ export function AsciiHero() {
           vx[k] += (gx / len) * c;
           vy[k] += -(gy / len) * c;
         }
+      // Settle. fluid() runs on the grab frame, about ten times a second, so a
+      // per-call decay of 0.985 leaves the field churning for the better part
+      // of twenty seconds after the pointer has gone. Once nothing is driving
+      // it, damp hard so it returns to rest in about a second.
+      const idle = performance.now() - lastMove;
+      if (idle > 260) {
+        const damp = idle > 900 ? 0.72 : 0.88;
+        for (let i = 0; i < vx.length; i++) { vx[i] *= damp; vy[i] *= damp; }
+      }
+
       // Curl adds energy every frame. Without a ceiling it compounds and the
       // field tears itself apart after a few seconds.
       for (let i = 0; i < vx.length; i++) {
@@ -347,6 +357,7 @@ export function AsciiHero() {
       if (!haveM) { pmx = ncx; pmy = ncy; haveM = true; }
       mcx = ncx;
       mcy = ncy;
+      lastMove = performance.now();
     };
 
     let rt: ReturnType<typeof setTimeout>;
@@ -354,6 +365,28 @@ export function AsciiHero() {
       clearTimeout(rt);
       rt = setTimeout(() => { build(); measure(); }, 160);
     };
+
+    // Autoplay is a request, not a promise. Without this the field renders one
+    // frame and then never changes, which reads as a broken animation.
+    const v = videoRef.current;
+    let playTimer = 0;
+    function ensurePlaying() {
+      if (!v) return;
+      if (v.paused || v.ended) {
+        const p = v.play();
+        if (p && p.catch) p.catch(() => {});
+      }
+    }
+    if (v) {
+      ["loadeddata", "canplay", "stalled", "suspend", "pause"].forEach((ev) =>
+        v.addEventListener(ev, ensurePlaying)
+      );
+      // and a slow heartbeat, for the cases that fire no event at all
+      playTimer = window.setInterval(ensurePlaying, 2000);
+      ensurePlaying();
+    }
+    const onVis = () => { if (!document.hidden) ensurePlaying(); };
+    document.addEventListener("visibilitychange", onVis);
 
     bakeAtlas();
     build();
@@ -375,6 +408,8 @@ export function AsciiHero() {
       const t = setTimeout(() => { grab(); renderAscii(); composite(); }, 500);
       return () => {
         clearTimeout(t);
+        clearInterval(playTimer);
+        document.removeEventListener("visibilitychange", onVis);
         ro.disconnect();
         window.removeEventListener("pointermove", onPointer);
         window.removeEventListener("resize", onResize);
@@ -385,6 +420,10 @@ export function AsciiHero() {
     raf = requestAnimationFrame(tick);
     return () => {
       cancelAnimationFrame(raf);
+      clearInterval(playTimer);
+      document.removeEventListener("visibilitychange", onVis);
+      if (v) ["loadeddata","canplay","stalled","suspend","pause"].forEach((ev) =>
+        v.removeEventListener(ev, ensurePlaying));
       clearTimeout(rt);
       ro.disconnect();
       window.removeEventListener("pointermove", onPointer);
@@ -399,6 +438,7 @@ export function AsciiHero() {
       <section className="tb-open">
         <canvas ref={canvasRef} className="tb-open-canvas" aria-hidden />
         <video
+          suppressHydrationWarning
           ref={videoRef}
           className="tb-open-src"
           src="/hero/eye-loop.mp4"
