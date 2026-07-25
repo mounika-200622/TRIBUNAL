@@ -7,8 +7,19 @@ import OpenAI from "openai";
  * reasoning quality actually shows, costs money.
  */
 
+/**
+ * Every Groq key configured, in order. Quotas are per-key as well as per-model,
+ * so a second key is a second daily budget — set GROQ_API_KEY_2, _3, … to raise
+ * the ceiling. Judges hammering the live demo shouldn't be able to exhaust us.
+ */
+export const GROQ_KEYS: string[] = [
+  process.env.GROQ_API_KEY,
+  process.env.GROQ_API_KEY_2,
+  process.env.GROQ_API_KEY_3,
+].filter((k): k is string => Boolean(k));
+
 export const hasOpenAI = Boolean(process.env.OPENAI_API_KEY);
-export const hasGroq = Boolean(process.env.GROQ_API_KEY);
+export const hasGroq = GROQ_KEYS.length > 0;
 export const hasSearch = Boolean(process.env.TAVILY_API_KEY);
 
 /** Fast + free: extraction, prosecutors, defense. */
@@ -35,17 +46,21 @@ export const MAX_CLAIMS = Number(process.env.MAX_CLAIMS ?? 4);
 /** Sources fetched per claim. */
 export const SOURCES_PER_CLAIM = Number(process.env.SOURCES_PER_CLAIM ?? 4);
 
-let groqClient: OpenAI | null = null;
+const groqClients = new Map<string, OpenAI>();
 let openaiClient: OpenAI | null = null;
 
-export function groq(): OpenAI {
-  if (!groqClient) {
-    groqClient = new OpenAI({
-      apiKey: process.env.GROQ_API_KEY,
-      baseURL: "https://api.groq.com/openai/v1",
-    });
+function groqFor(key: string): OpenAI {
+  let c = groqClients.get(key);
+  if (!c) {
+    c = new OpenAI({ apiKey: key, baseURL: "https://api.groq.com/openai/v1" });
+    groqClients.set(key, c);
   }
-  return groqClient;
+  return c;
+}
+
+/** First configured key. Kept for callers that don't need rotation. */
+export function groq(): OpenAI {
+  return groqFor(GROQ_KEYS[0] ?? "");
 }
 
 export function openai(): OpenAI {
@@ -85,24 +100,29 @@ export async function groqChat(
   const { json = true, temperature = 0.2 } = opts;
   let lastError: unknown;
 
+  // Exhaust the preferred model across every key before dropping a tier — a
+  // quota is per key AND per model, so a second key restores the best model
+  // rather than forcing us onto a weaker one.
   for (const model of FAST_MODEL_CHAIN) {
-    try {
-      const r = await groq().chat.completions.create({
-        model,
-        messages: [
-          { role: "system", content: system },
-          { role: "user", content: user },
-        ],
-        ...(json ? { response_format: { type: "json_object" as const } } : {}),
-        temperature,
-      });
-      return { content: r.choices[0]?.message?.content ?? "", model };
-    } catch (e) {
-      lastError = e;
-      if (!isQuotaError(e)) throw e;
-      console.warn(`[groq] ${model} out of quota — falling through`);
+    for (const [i, key] of GROQ_KEYS.entries()) {
+      try {
+        const r = await groqFor(key).chat.completions.create({
+          model,
+          messages: [
+            { role: "system", content: system },
+            { role: "user", content: user },
+          ],
+          ...(json ? { response_format: { type: "json_object" as const } } : {}),
+          temperature,
+        });
+        return { content: r.choices[0]?.message?.content ?? "", model };
+      } catch (e) {
+        lastError = e;
+        if (!isQuotaError(e)) throw e;
+        console.warn(`[groq] ${model} exhausted on key ${i + 1} — rotating`);
+      }
     }
   }
 
-  throw lastError ?? new Error("every model in the chain is exhausted");
+  throw lastError ?? new Error("every Groq key and model is exhausted");
 }
