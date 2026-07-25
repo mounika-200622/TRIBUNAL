@@ -650,14 +650,14 @@ body {
    room. Everything else answers to hairlines and bracket labels.
    ───────────────────────────────────────────────────────────────────────── */
 
-.tb-page .tb-mask {
+.tb-page h2.tb-mask, .tb-page h1.tb-mask {
   font-size: clamp(46px, 8.6vw, 150px) !important;
   line-height: 0.86 !important;
   letter-spacing: 0.02em !important;
   text-transform: uppercase;
   padding-bottom: 0.06em !important;
 }
-.tb-page .tb-mask em { font-style: normal; color: var(--color-refuted); }
+.tb-page h2.tb-mask em, .tb-page h1.tb-mask em { font-style: normal; color: var(--color-refuted); }
 
 /* the eyebrow that names each block */
 .tb-eyebrow {
@@ -973,31 +973,15 @@ body {
    Contrast and line length came back clean and are left alone.
    ───────────────────────────────────────────────────────────────────────── */
 
-/* a floor under every label, whatever the viewport unit resolves to */
-.tb-mono,
-.tb-page .font-body,
-.tv-tally-head,
-.tv-tally-key dd,
-.tv-record-count,
-.tb-eyebrow {
-  font-size: max(11.5px, 1em);
-}
-.tb-page [style*="--u"],
-.tb-page span,
-.tb-page p,
-.tb-page label {
-  font-size: max(11.5px, var(--fs, 1em));
-}
-/* the primary action should never be the smallest text on the screen */
+/* The floor comes from the base unit, which was raised, not from blanket
+   font-size overrides. An earlier pass used max(11.5px, 1em) across spans,
+   paragraphs and labels: in a font-size property 1em resolves against the
+   PARENT, so every nesting level multiplied the one below it and body copy
+   ended up at display scale. Only the primary action is pinned here, in
+   absolute units, because it must never be the smallest text on screen. */
 .tb-page .tb-convene {
-  font-size: max(13.5px, 1em) !important;
+  font-size: clamp(13.5px, 1.05vw, 15px) !important;
   letter-spacing: 0.12em !important;
-}
-/* section labels sat at 8px with 0.22em tracking */
-.tb-page .tb-section-label,
-.tb-page [class*="uppercase"][class*="font-body"] {
-  font-size: max(11.5px, 1em);
-  letter-spacing: 0.14em;
 }
 
 /* Focus has to be visible to be useful. One treatment everywhere, drawn
