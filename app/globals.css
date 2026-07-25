@@ -650,14 +650,14 @@ body {
    room. Everything else answers to hairlines and bracket labels.
    ───────────────────────────────────────────────────────────────────────── */
 
-.tb-page h1.tb-mask {
+.tb-page .tb-mask {
   font-size: clamp(46px, 8.6vw, 150px) !important;
   line-height: 0.86 !important;
   letter-spacing: 0.02em !important;
   text-transform: uppercase;
   padding-bottom: 0.06em !important;
 }
-.tb-page h1.tb-mask em { font-style: normal; color: var(--color-refuted); }
+.tb-page .tb-mask em { font-style: normal; color: var(--color-refuted); }
 
 /* the eyebrow that names each block */
 .tb-eyebrow {
@@ -1049,3 +1049,28 @@ textarea:focus-visible {
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .tb-skip:focus-visible { transform: translateY(0); }
+
+/* Spacing snapped to a scale. The rendered page was mixing 7px and 8px gaps,
+   which is not a decision anyone made, it is two roundings of the same
+   intent. One step, used everywhere. */
+:root {
+  --step-1: 8px;
+  --step-2: 16px;
+  --step-3: 24px;
+  --step-4: 40px;
+  --step-5: 68px;
+}
+.tb-page p + p,
+.tv-record-item p + p { margin-top: var(--step-2); }
+.tb-page .tb-eyebrow { margin-bottom: var(--step-2); }
+
+/* A middle rung on the type scale. The page jumped from 16px straight to
+   43px, so anything that needed to sit between body and display had nowhere
+   to go and defaulted down. */
+.tb-lede {
+  font-family: var(--font-serif);
+  font-size: clamp(19px, 1.9vw, 26px);
+  line-height: 1.45;
+  color: var(--color-paper);
+  max-width: 46ch;
+}
